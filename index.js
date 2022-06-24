@@ -18,14 +18,9 @@ const wss = new WebSocketServer({ server });
 wss.on('connection', (ws) => {
   console.log('Client connected');
   ws.on('message', function(message) {
-    console.log('received:', message, typeof message);
     let data = message.toJSON().data
-    console.log('data', data, typeof data );
     let stringData = bin2String(data)
     console.log('stringData', stringData, typeof stringData );
-    let result = JSON.parse(stringData)
-    console.log('result', result, typeof result );
-    
     wss.clients.forEach(function each(client) {
         if (client.readyState === WebSocket.OPEN) {
           client.send(stringData);
