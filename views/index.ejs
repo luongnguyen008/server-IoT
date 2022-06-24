@@ -2,7 +2,9 @@
 <html>
 <head>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@1.27.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.0.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0"></script>
   <script>
     let HOST = location.origin.replace(/^http/, 'ws')
     console.log("wss", HOST)
@@ -92,6 +94,7 @@
         }
       }
     };
+    
     let myChart = new Chart(
       document.getElementById('myChart'),
       config
