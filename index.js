@@ -25,11 +25,14 @@ wss.on('connection', (ws) => {
     console.log('stringData', stringData, typeof stringData );
     let result = JSON.parse(stringData)
     console.log('result', result, typeof result );
-    wss.clients.forEach(function each(client) {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(result);
-      }
-    });
+    setInterval(() => {
+      wss.clients.forEach(function each(client) {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(result);
+        }
+      });
+    }, 1000)
+    
   });
   ws.on('close', () => console.log('Client disconnected'));
 });
