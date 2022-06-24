@@ -12,10 +12,11 @@
       let result = JSON.parse(event.data)
       console.log('result', result, typeof result );
       let dataX = myChart.data.datasets[0].data
-      dataX.push(result.x)
-      dataX.shift();
+      // dataX.push(result.x)
+      // dataX.shift();
+      let dataN = dataX.map(x=> x+Math.random(10))
       console.log("dataX", dataX)
-      myChart.data.datasets[0].data = dataX;
+      myChart.data.datasets[0].data = dataN;
       myChart.update();  
       el = document.getElementById('server-time');
       el.innerHTML = 'Server time: ' + result.x ;
