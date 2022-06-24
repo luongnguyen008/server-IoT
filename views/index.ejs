@@ -2,6 +2,7 @@
 <html>
 <head>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@2.0.0"></script>
   <script>
     let HOST = location.origin.replace(/^http/, 'ws')
     console.log("wss", HOST)
@@ -40,33 +41,56 @@
   <script>
     
   
-    let data = {
+    const data = {
       datasets: [
         {
-          label: 'My First dataset',
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
-          data: [0,0,0,0,0,0,0],
+          label: 'Dataset 1 (Linear Interpolation)',
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 0.2)',
+          borderDash: [8, 4],
+          data: []
         },
         {
-          label: 'My Second dataset',
-          backgroundColor: 'rgb(0, 99, 132)',
-          borderColor: 'rgb(0, 99, 132)',
-          data: [0,0,0,0,0,0,0],
+          label: 'Dataset 2 (Cubic Interpolation)',
+          backgroundColor: 'rgb(75, 192, 192)',
+          borderColor: "rgb(75, 192, 192)",
+          cubicInterpolationMode: 'monotone',
+          data: []
         },
         {
-          label: 'My Third dataset',
-          backgroundColor: 'rgb(255, 99, 0)',
-          borderColor: 'rgb(0, 99, 132)',
-          data: [0,0,0,0,0,0,0],
+          label: 'Dataset 2 (Cubic Interpolation)',
+          backgroundColor: 'rgb(175, 192, 12)',
+          borderColor: "rgb(175, 192, 12)",
+          cubicInterpolationMode: 'monotone',
+          data: []
         },
-    ]
+      ]
     };
   
-    let config = {
+    const config = {
       type: 'line',
       data: data,
-      options: {}
+      options: {
+        scales: {
+          x: {
+            type: 'realtime',
+            realtime: {
+              duration: 20000,
+              refresh: 1000,
+              delay: 2000,
+            }
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Value'
+            }
+          }
+        },
+        interaction: {
+          intersect: false
+        }
+      }
     };
     let myChart = new Chart(
       document.getElementById('myChart'),
