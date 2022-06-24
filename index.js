@@ -20,7 +20,7 @@ wss.on('connection', (ws) => {
   ws.on('message', function(message) {
     let data = message.toJSON().data
     let stringData = bin2String(data)
-    console.log('stringData', stringData, typeof stringData );
+    console.log('Data', JSON.parse(stringData));
     wss.clients.forEach(function each(client) {
         if (client.readyState === WebSocket.OPEN) {
           client.send(stringData);
