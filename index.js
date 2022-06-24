@@ -23,12 +23,13 @@ wss.on('connection', (ws) => {
     console.log('data', data, typeof data );
     let stringData = bin2String(data)
     console.log('stringData', stringData, typeof stringData );
-    // let result = JSON.parse(stringData)
-    // console.log('result', result, typeof result );
-    // wss.clients.forEach((client) => {
-    //   // console.log("time", Math.floor(Math.random() * 101))
-    //   client.send(result);
-    // });
+    let result = JSON.parse(stringData)
+    console.log('result', result, typeof result );
+    wss.clients.forEach(function each(client) {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(result);
+      }
+    });
   });
   ws.on('close', () => console.log('Client disconnected'));
 });
