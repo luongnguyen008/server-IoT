@@ -20,13 +20,15 @@ wss.on('connection', (ws) => {
   ws.on('message', function(message) {
     console.log('received:', message, typeof message);
     let data = message.toJSON().data
+    console.log('data', data, typeof data );
     let stringData = bin2String(data)
-    let result = JSON.parse(stringData)
-    console.log('result', result, typeof result );
-    wss.clients.forEach((client) => {
-      // console.log("time", Math.floor(Math.random() * 101))
-      client.send(result);
-    });
+    console.log('stringData', stringData, typeof stringData );
+    // let result = JSON.parse(stringData)
+    // console.log('result', result, typeof result );
+    // wss.clients.forEach((client) => {
+    //   // console.log("time", Math.floor(Math.random() * 101))
+    //   client.send(result);
+    // });
   });
   ws.on('close', () => console.log('Client disconnected'));
 });
