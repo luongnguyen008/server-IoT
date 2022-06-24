@@ -25,14 +25,13 @@ wss.on('connection', (ws) => {
     console.log('stringData', stringData, typeof stringData );
     let result = JSON.parse(stringData)
     console.log('result', result, typeof result );
-   
-    setInterval(function () {
-      wss.clients.forEach(function each(client) {
-            if (client.readyState === WebSocket.OPEN) {
-          client.send(result);
+    
+    wss.clients.forEach(function each(client) {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(stringData);
         }
-      });
-    }, 1000);
+    });
+   
         
      
     

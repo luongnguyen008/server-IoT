@@ -9,14 +9,16 @@
     let el;
     ws.onmessage = (event) => {
       console.log("event", event)
+      let result = JSON.parse(event.data)
+      console.log('result', result, typeof result );
       let dataX = myChart.data.datasets[0].data
-      dataX.push(event.data.x)
+      dataX.push(result.x)
       dataX.shift()
       console.log("dataX", dataX)
       myChart.data.datasets[0].data = dataX;
       myChart.update();  
       el = document.getElementById('server-time');
-      el.innerHTML = 'Server time: ' + event.data.x ;
+      el.innerHTML = 'Server time: ' + result.x ;
     };
   </script>
 </head>
