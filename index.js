@@ -28,7 +28,7 @@ wss.on('connection', (ws) => {
     setInterval(() => {
       wss.clients.forEach(function each(client) {
         if (client.readyState === WebSocket.OPEN) {
-          client.send(result);
+          client.send("abc");
         }
       });
     }, 1000)
