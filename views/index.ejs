@@ -16,12 +16,9 @@
       dataX.shift();
       console.log("dataX", dataX)
       myChart.data.datasets[0].data = dataX;
-      setInterval(()=> {
-        myChart.update();  
-        el = document.getElementById('server-time');
-        el.innerHTML = 'Server time: ' + result.x ;
-      }, 1000)
-      
+      myChart.update();  
+      el = document.getElementById('server-time');
+      el.innerHTML = 'Server time: ' + result.x ;
     };
   </script>
 </head>
