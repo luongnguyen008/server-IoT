@@ -3,7 +3,7 @@
 <head>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    let HOST = location.origin.replace(/^http/, 'ws')
+    let HOST = location.origin.replace(/^http/, 'wss')
     console.log("wss", HOST)
     let ws = new WebSocket(HOST);
     let el;
