@@ -17,6 +17,7 @@ const server = express()
 const wss = new Server({ server });
 wss.on('connection', (ws) => {
   console.log('Client connected');
+  console.log("ws", ws)
   ws.on('message', function(message) {
     console.log('received:', message, typeof message);
     let data = message.toJSON().data
