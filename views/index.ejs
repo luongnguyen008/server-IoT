@@ -10,18 +10,40 @@
     console.log("wss", HOST)
     let ws = new WebSocket(HOST);
     let el;
+    var result1;
+
+    const onRefresh = chart => {
+      const now = Date.now();
+      // let dataX = pushAndShift(myChart.data.datasets[0].data, )
+      // let dataY = pushAndShift(myChart.data.datasets[1].data, result.y)
+      // let dataZ = pushAndShift(myChart.data.datasets[2].data, result.z)
+      // console.log("data", dataX, dataY, dataZ)
+      chart.data.datasets[0].data.push({
+          x: now,
+          y: result.x
+      })
+      chart.data.datasets[1].data.push({
+          x: now,
+          y: result.y
+      })
+      chart.data.datasets[2].data.push({
+          x: now,
+          y: result.z
+      })
+    };
     ws.onmessage = (event) => {
       console.log("event", event)
       let result = JSON.parse(event.data)
       console.log('result', result, typeof result );
-      let dataX = pushAndShift(myChart.data.datasets[0].data, result.x)
-      let dataY = pushAndShift(myChart.data.datasets[1].data, result.y)
-      let dataZ = pushAndShift(myChart.data.datasets[2].data, result.z)
-      console.log("data", dataX, dataY, dataZ)
-      myChart.data.datasets[0].data = dataX;
-      myChart.data.datasets[1].data = dataY;
-      myChart.data.datasets[2].data = dataZ;
-      myChart.update();  
+      result1 = result
+      // let dataX = pushAndShift(myChart.data.datasets[0].data, result.x)
+      // let dataY = pushAndShift(myChart.data.datasets[1].data, result.y)
+      // let dataZ = pushAndShift(myChart.data.datasets[2].data, result.z)
+      // console.log("data", dataX, dataY, dataZ)
+      // myChart.data.datasets[0].data = dataX;
+      // myChart.data.datasets[1].data = dataY;
+      // myChart.data.datasets[2].data = dataZ;
+      // myChart.update();  
       el = document.getElementById('server-time');
       el.innerHTML = 'Server time: ' + result.x ;
     };
@@ -80,6 +102,7 @@
               duration: 20000,
               refresh: 1000,
               delay: 2000,
+              onRefresh: onRefresh
             }
           },
           y: {
