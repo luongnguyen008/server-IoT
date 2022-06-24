@@ -13,6 +13,7 @@
       console.log('result', result, typeof result );
       let dataX = myChart.data.datasets[0].data
       dataX.push(result.x)
+      dataX.shift();
       console.log("dataX", dataX)
       myChart.data.datasets[0].data = dataX;
       myChart.update();  
