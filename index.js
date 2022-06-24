@@ -27,7 +27,7 @@ wss.on('connection', (ws) => {
     console.log('result', result, typeof result );
     wss.clients.forEach(function each(client) {
       if (client.readyState === WebSocket.OPEN) {
-        client.send("abc");
+        client.send(result);
       }
     });
     
