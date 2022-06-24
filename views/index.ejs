@@ -20,15 +20,15 @@
       // console.log("data", dataX, dataY, dataZ)
       chart.data.datasets[0].data.push({
           x: now,
-          y: result.x
+          y: result1.x
       })
       chart.data.datasets[1].data.push({
           x: now,
-          y: result.y
+          y: result1.y
       })
       chart.data.datasets[2].data.push({
           x: now,
-          y: result.z
+          y: result1.z
       })
     };
     ws.onmessage = (event) => {
