@@ -14,10 +14,6 @@
 
     const onRefresh = chart => {
       const now = Date.now();
-      // let dataX = pushAndShift(myChart.data.datasets[0].data, )
-      // let dataY = pushAndShift(myChart.data.datasets[1].data, result.y)
-      // let dataZ = pushAndShift(myChart.data.datasets[2].data, result.z)
-      // console.log("data", dataX, dataY, dataZ)
       chart.data.datasets[0].data.push({
           x: now,
           y: result1.x
@@ -32,35 +28,19 @@
       })
     };
     ws.onmessage = (event) => {
-      console.log("event", event)
       let result = JSON.parse(event.data)
-      console.log('result', result, typeof result );
+      console.log('result', result);
       result1 = result
-      // let dataX = pushAndShift(myChart.data.datasets[0].data, result.x)
-      // let dataY = pushAndShift(myChart.data.datasets[1].data, result.y)
-      // let dataZ = pushAndShift(myChart.data.datasets[2].data, result.z)
-      // console.log("data", dataX, dataY, dataZ)
-      // myChart.data.datasets[0].data = dataX;
-      // myChart.data.datasets[1].data = dataY;
-      // myChart.data.datasets[2].data = dataZ;
-      // myChart.update();  
-      el = document.getElementById('server-time');
-      el.innerHTML = 'Server time: ' + result.x ;
     };
-    function pushAndShift(array, value){
-        array.push(value)
-        array.shift()
-        return array
-    }
   </script>
 </head>
 
 <body>
 
-  <p id="server-time"></p>
+ 
   <div class="chart-container" style="position: relative; height:40vh; width:80vw">
-    <canvas id="myChart"></canvas>
-</div>
+      <canvas id="myChart"></canvas>
+  </div>
   
   <script>
     
@@ -68,21 +48,21 @@
     const data = {
       datasets: [
         {
-          label: 'Dataset 1 (Linear Interpolation)',
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgba(255, 99, 132, 0.2)',
+          label: 'X',
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
           borderDash: [8, 4],
           data: []
         },
         {
-          label: 'Dataset 2 (Cubic Interpolation)',
+          label: 'Y',
           backgroundColor: 'rgb(75, 192, 192)',
           borderColor: "rgb(75, 192, 192)",
           cubicInterpolationMode: 'monotone',
           data: []
         },
         {
-          label: 'Dataset 2 (Cubic Interpolation)',
+          label: 'Z',
           backgroundColor: 'rgb(175, 192, 12)',
           borderColor: "rgb(175, 192, 12)",
           cubicInterpolationMode: 'monotone',

@@ -8,13 +8,11 @@ const server = express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('index'))
-// .get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 
 const wss = new WebSocketServer({ server });
+
 wss.on('connection', (ws) => {
   console.log('Client connected');
   ws.on('message', function(message) {
@@ -26,10 +24,6 @@ wss.on('connection', (ws) => {
           client.send(stringData);
         }
     });
-   
-        
-     
-    
   });
   ws.on('close', () => console.log('Client disconnected'));
 });
